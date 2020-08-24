@@ -10,9 +10,9 @@ echo color("white","           Time  : ".date('[d-m-Y] [H:i:s]')."   \n");
 echo color("green","                  SCRIFT GOJEK AGUSTUS      \n");
 echo color("yellow","                 JANGAN PELIT JANGAN RAKUS\n");
 echo color("green","================================\n");
-        $nama = nama();
+                $nama = nama();
         $email = str_replace(" ", "", $nama) . mt_rand(100, 999);
-        echo color("yellow","NOMOR: ");
+        echo color("green","Masukkan Nomor : ");
         // $no = trim(fgets(STDIN));
         $nohp = trim(fgets(STDIN));
         $nohp = str_replace("62","62",$nohp);
@@ -39,8 +39,9 @@ echo color("green","================================\n");
         $register = request("/v5/customers", null, $data);
         if(strpos($register, '"otp_token"')){
         $otptoken = getStr('"otp_token":"','"',$register);
-        echo color("green","!=========TEMPAT DAFTAR========!")\n");
-        echo color("yellow"," OTP BRO: ");
+        echo color("purple"," Masukkan OTP..")."\n";
+        otp:
+        echo color("white"," Otp : ");
         $otp = trim(fgets(STDIN));
         $data1 = '{"client_name":"gojek:cons:android","data":{"otp":"' . $otp . '","otp_token":"' . $otptoken . '"},"client_secret":"83415d06-ec4e-11e6-a41b-6c40088ab51e"}';
         $verif = request("/v5/customers/phone/verify", null, $data1);
@@ -56,21 +57,21 @@ echo color("green","================================\n");
 include "funct.php";
 // function change()
 {
-echo ("      DISINI TEMPAT LOGIN              \n");
+echo ("        Proses menuju Token                  \n");
 
 $frdy = new frdy();
 /** 
 @ step 1
 return @type json contain <otpToken> 
 */
-echo "MASUKIN ULANG NOMORNYA : ";
+echo "NOMOR INPUT: ";
 $phoneNumber = trim(fgets(STDIN));
 echo $frdy->loginRequest($phoneNumber); 
 /** 
 @ step 2
 return @type json contain <access_token> 
 */
-echo "OTP LOGIN : ";
+echo "OTP: ";
 $otpCode = trim(fgets(STDIN));
 echo "OTP TOKEN: ";
 $otpToken = trim(fgets(STDIN));
